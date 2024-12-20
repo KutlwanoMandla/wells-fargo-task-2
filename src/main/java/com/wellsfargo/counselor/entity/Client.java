@@ -1,6 +1,5 @@
 package com.wellsfargo.counselor.entity;
 
-
 import java.util.List;
 
 import jakarta.persistence.CascadeType;
@@ -12,18 +11,18 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "advisor")
-public class Advisor {
-
+@Table(name = "client")
+public class Client {
+    
     @Id
     @GeneratedValue()
-    @Column(name = "advisor_id")
-    private long advisorId;
-
+    @Column(name = "client_id")
+    private Long clientId;
+    
     @Column(name = "first_name", nullable = false)
     private String firstName;
 
-    @Column(name = "last_name",nullable = false)
+    @Column(name = "last_name", nullable = false)
     private String lastName;
 
     @Column(nullable = false)
@@ -35,14 +34,19 @@ public class Advisor {
     @Column(nullable = false)
     private String email;
 
-    @OneToMany(mappedBy = "advisor", cascade = CascadeType.ALL)
-    private List<Client> clients;
+    @OneToMany(mappedBy = "client", cascade = CascadeType.ALL)
+    private List<Portfolio> portfolios;
 
-    protected Advisor() {
+
+    public Client(){
 
     }
 
-    public Advisor(String firstName, String lastName, String address, String phone, String email) {
+    public Client(
+        String firstName, String lastName,
+        String address, String phone, String email
+    ){
+
         this.firstName = firstName;
         this.lastName = lastName;
         this.address = address;
@@ -50,8 +54,8 @@ public class Advisor {
         this.email = email;
     }
 
-    public Long getAdvisorId() {
-        return advisorId;
+    public Long getClientId() {
+        return clientId;
     }
 
     public String getFirstName() {
@@ -93,4 +97,5 @@ public class Advisor {
     public void setEmail(String email) {
         this.email = email;
     }
+    
 }
